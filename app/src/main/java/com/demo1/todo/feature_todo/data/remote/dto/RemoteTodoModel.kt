@@ -8,6 +8,4 @@ data class RemoteTodoModel(
     val timeStamp: Long,
     val isCompleted: Boolean,
     val archived: Boolean,
-
-
     )
