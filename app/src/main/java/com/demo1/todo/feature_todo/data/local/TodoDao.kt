@@ -13,7 +13,7 @@ interface TodoDao {
     fun getAllTodoItem() : List<LocalTodoModel>
 
     @Query("SELECT * FROM todo WHERE id = :id")
-    suspend fun getSingleTodoItemBuId(id : Int) : LocalTodoModel
+    suspend fun getSingleTodoItemBuId(id : Int) : LocalTodoModel?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addAllTodoItems(todo : List<LocalTodoModel>)

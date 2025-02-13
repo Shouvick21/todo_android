@@ -1,11 +1,18 @@
 package com.demo1.todo.feature_todo.data.remote.dto
 
-data class RemoteTodoModel(
+import com.google.gson.annotations.SerializedName
 
-    val id: Int,
+data class RemoteTodoModel(
+    @SerializedName("ID")
+    val id: Int?,
+    @SerializedName("Title")
     val title: String,
+    @SerializedName("Description")
     val desciption: String,
+    @SerializedName("TimeStamp")
     val timeStamp: Long,
+    @SerializedName("Completed")
     val isCompleted: Boolean,
+    @SerializedName("Archived")
     val archived: Boolean,
     )

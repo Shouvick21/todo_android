@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Todo</string>
+    <string name="todo_title_description_blank_error">Both the todo Title and Description must be populated</string>
 </resources>
