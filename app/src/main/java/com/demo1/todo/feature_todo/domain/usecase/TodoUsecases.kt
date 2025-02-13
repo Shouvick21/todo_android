@@ -42,6 +42,7 @@ class TodoUsecases @Inject constructor(
     suspend fun getSingleTodoByIdUsecase(id : Int) : TodoModel?{
         return repo.getSingleTodoItemById(id)
     }
+
     suspend fun getAllTodos(
         todoItemsOrder : TodoItemsOrder = TodoItemsOrder.Time(SortingDirection.down, true)
     ) :TodoUseCaseResult{
