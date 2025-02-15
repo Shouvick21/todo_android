@@ -5,10 +5,15 @@ import androidx.room.Room
 import com.demo1.todo.feature_todo.data.local.TodoDao
 import com.demo1.todo.feature_todo.data.local.TodoDataBase
 import com.demo1.todo.feature_todo.data.remote.TodoApi
+import com.demo1.todo.feature_todo.data.repository.TodoListRepoImplementation
+import com.demo1.todo.feature_todo.domain.repository.Todo_list_repo
+import com.demo1.todo.feature_todo.domain.usecase.TodoUsecases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
@@ -16,7 +21,7 @@ import javax.inject.Singleton
 
 
 @Module
-@InstallIn(Singleton::class)
+@InstallIn(SingletonComponent::class)
 object TodoModule {
 
     @Provides
@@ -46,6 +51,21 @@ object TodoModule {
     @Provides
     fun provideRetrofit(retrofit : Retrofit) : TodoApi{
         return retrofit.create(TodoApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRepo(
+        dao: TodoDao,
+        api: TodoApi,
+        @IoDipatcher dispatcher: CoroutineDispatcher
+    ) : Todo_list_repo{
+        return TodoListRepoImplementation(dao,api,dispatcher)
+    }
+
+    @Provides
+    fun provideUsecases(repo : Todo_list_repo ) : TodoUsecases {
+        return TodoUsecases(repo)
     }
 
 
